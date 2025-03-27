@@ -49,14 +49,27 @@ class CompteBancaire {
         return $this->getLibelle()." appartenant à ".$this->getTitulaire(). ":<br>";
     }
 
-    public function virement(float $montant, string $type) {
-        if ($type === "debit") {
-            $this->_solde -= $montant;
-                echo "<br>".$this->__toString()."Vous avez êtez débité d'un montant de $montant ".$this->getDevise().".<br>Solde restant: ".$this->getSolde()." ".$this->getDevise()."<br>";
-        } elseif ($type === "credit") {
-            $this->_solde += $montant;
+    public function crediter(float $montant) {
+        $this->_solde += $montant;
             echo "<br>".$this->__toString()."Vous avez êtez crédité d'un montant de $montant ".$this->getDevise().".<br>Solde restant: ".$this->getSolde()." ".$this->getDevise()."<br>";
 
         }
+
+    public function debiter(float $montant) {
+        $this->_solde -= $montant;
+                echo "<br>".$this->__toString()."Vous avez êtez débité d'un montant de $montant ".$this->getDevise().".<br>Solde restant: ".$this->getSolde()." ".$this->getDevise()."<br>";
+    }
+
+    public function virement(CompteBancaire $compteCible, float $montant) {
+        if ($this->_solde < $montant) {
+            echo "Virement échoué, solde insuffisant.";
+                return;
+        } 
+        $this->debiter($montant);
+        $compteCible->crediter($montant);
     }
 }
+
+
+    
+

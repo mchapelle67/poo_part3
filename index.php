@@ -18,9 +18,13 @@ $compte3 = new CompteBancaire("Livret A", "253.21", "EUR", $nilsR);
 echo $manonC->afficherInformations();
 echo $nilsR->afficherInformations();
 
-echo $compte1->virement(24.29, "debit");
-
-echo $compte3->virement(24.29, "credit");
+echo $compte1->crediter(24.29);
+echo $compte3->debiter(6.99, "credit");
+echo "<br>";
+echo "********************VIREMENT ********************<br>";
+echo $compte1->virement($compte3, 26.99);
+echo "<br>";
+echo $compte1->virement($compte3, 26450.99);
 
 
 // var_dump($manonC);
@@ -43,14 +47,3 @@ echo $compte3->virement(24.29, "credit");
 
 
 
-
-
-// classe 
-
-// objet 
-
-// encapsulation 
-
-// methode magique 
-
-// $this 
